@@ -1,0 +1,72 @@
+<div class="container mt-5">
+  <h2>{{ isEdit ? 'Edit Student' : 'Register Student' }}</h2>
+  <form (ngSubmit)="registerStudent()" #registerForm="ngForm" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="studentName" class="form-label">Student Name</label>
+      <input type="text" id="studentName" [(ngModel)]="student.name" name="name" class="form-control" required>
+      <div class="invalid-feedback">
+        Please provide a valid name.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="studentEmail" class="form-label">Student Email</label>
+      <input type="email" id="studentEmail" [(ngModel)]="student.email" name="email" class="form-control" required>
+      <div class="invalid-feedback">
+        Please provide a valid email.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <input type="tel" id="phoneNumber" [(ngModel)]="student.phoneNumber" name="phoneNumber" pattern="^\+?\d{10,15}$" class="form-control" required>
+      <div class="invalid-feedback">
+        Please provide a valid phone number.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" id="address" [(ngModel)]="student.address" name="address" class="form-control" required>
+      <div class="invalid-feedback">
+        Please provide a valid address.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="studentRent" class="form-label">Rent Amount</label>
+      <input type="number" id="studentRent" [(ngModel)]="student.rent" name="rent" class="form-control" required>
+      <div class="invalid-feedback">
+        Please provide a valid rent amount.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input type="date" id="startDate" [(ngModel)]="student.startDate" name="startDate" class="form-control" required>
+      <div class="invalid-feedback">
+        Please provide a valid start date.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="photo" class="form-label">Photo</label>
+      <input type="file" id="photo" (change)="onFileChange($event, 'photo')" class="form-control" required>
+      <div class="invalid-feedback">
+        Please upload a photo.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="leaseAgreement" class="form-label">Lease Agreement</label>
+      <input type="file" id="leaseAgreement" (change)="onFileChange($event, 'leaseAgreement')" class="form-control" required>
+      <div class="invalid-feedback">
+        Please upload a lease agreement.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">{{ isEdit ? 'Update' : 'Register' }}</button>
+  </form>
+
+  <!-- Success message display -->
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error message display -->
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

@@ -1,0 +1,50 @@
+
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+           <form (ngSubmit)="signup()" #signupForm="ngForm" class="needs-validation" novalidate>
+            <h2 class="title">New Here ?</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" id ="username" [(ngModel)]="username" name="username" placeholder="Username" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input  type="email" id="email" [(ngModel)]="email" name="email" placeholder="email address" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password"  [(ngModel)]="password" name="password" placeholder="Password" />
+            </div>
+            <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input type="conpassword"  [(ngModel)]="conpassword" name="conpassword" placeholder="Confirm Password" />
+              </div>
+            <input type="submit" class="btn" value="Sign up" />
+            <p class="social-text">Or Sign up with Google</p>
+            <div class="social-media">
+             
+              <a (click)="signInWithGoogle()" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+              
+            
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>Already have an account ?</h3>
+            <p>
+            Click here to Login
+            </p>
+            <button (click)="login()" class="btn transparent" id="sign-up-btn">
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>

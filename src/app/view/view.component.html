@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <h2>Registered Students</h2>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="students.length === 0 && !errorMessage" class="alert alert-info mt-3">
+      No students registered yet.
+    </div>
+  
+    <table *ngIf="students.length > 0" class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Rent</th>
+          <th>Address</th>
+          <th>Photo</th>
+          <th>Lease Agreement</th>
+      
+          <th>Action</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+            <td>
+                <img [src]="student.photo" alt="Photo" width="100" (click)="viewPhoto(student.photo)">
+              </td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.rent }}</td>
+          <td>{{ student.address }}</td>
+         
+          <td>
+            <a [href]="student.leaseAgreement" target="_blank" download>Download Lease Agreement</a>
+          </td>
+          <td>
+            <button class="btn btn-warning"  (click)="editStudent(student)" ><i class="fas fa-edit"></i></button>
+           
+            <button class="btn btn-danger"  (click)="deleteStudent(student.id)"><i class="fas fa-trash-alt"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  
+    <!-- Photo Modal -->
+    <div class="modal" tabindex="-1" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Photo</h5>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img [src]="selectedPhotoUrl" alt="Photo" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div></div>
+ 

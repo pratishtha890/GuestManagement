@@ -1,0 +1,36 @@
+<header class="header">
+  <h1 class="logo"><a href="#">GUESTS MANAGEMENT</a></h1>
+    <ul class="main-nav">
+  <li><a class="nav-link"  routerLink="/landing" routerLinkActive="active">Home</a></li>
+        <li><a class="nav-link"  routerLink="/register" routerLinkActive="active">Register Guests</a></li>
+        <li><a class="nav-link" routerLink="/view"routerLinkActive="active">View Registered Guests</a></li>
+        <li><a class="nav-link" routerLink="/notify"routerLinkActive="active">Send Reminders</a></li>
+        <li><a style="
+          cursor: pointer;"(click)="openLogoutModal()" >Logout</a></li>
+
+    </ul>
+</header> 
+
+  <router-outlet></router-outlet>
+
+
+
+
+  <!-- Logout Modal -->
+<div class="modal fade" [ngClass]="{'show': showmodal}" [ngStyle]="{'display': showmodal ? 'block' : 'none'}" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+       
+      </div>
+      <div class="modal-body">
+        Are you sure you want to logout?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
