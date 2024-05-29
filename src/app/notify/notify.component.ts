@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
@@ -6,13 +6,16 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 @Component({
   selector: 'app-notify',
   templateUrl: './notify.component.html',
-  styleUrl: './notify.component.css'
+  styleUrls: ['./notify.component.css'] // Corrected to `styleUrls`
 })
-export class NotifyComponent {
+export class NotifyComponent implements OnInit {
   notificationForm: FormGroup;
   students$: Observable<any[]>;
 
-  constructor(private fb: FormBuilder, private db: AngularFireDatabase) {
+  constructor(
+    private fb: FormBuilder,
+    private db: AngularFireDatabase
+  ) {
     this.notificationForm = this.fb.group({
       subject: ['', Validators.required],
       message: ['', Validators.required],
@@ -30,14 +33,17 @@ export class NotifyComponent {
     });
   }
 
+ 
+
   onSubmit() {
     if (this.notificationForm.valid) {
       const formValue = this.notificationForm.value;
-      this.sendEmail(formValue.subject, formValue.message, formValue.recipients);
+      this.sendEmail(formValue.recipients, formValue.subject, formValue.message);
     }
   }
 
-  sendEmail(subject: string, message: string, recipients: string) {
+
+  sendEmail(recipients: string, subject: string, message: string) {
     const payload = { subject, message, email: recipients };
     fetch('https://us-central1-test1-59d1e.cloudfunctions.net/sendEmailNotification', {
       method: 'POST',
@@ -61,5 +67,5 @@ export class NotifyComponent {
       alert('Error sending email: ' + error.message);
     });
   }
-  
 }
+

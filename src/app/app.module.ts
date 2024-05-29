@@ -17,6 +17,7 @@ import { ViewComponent } from './view/view.component';
 import { AuthService } from './auth.service';
 import { LandingComponent } from './landing/landing.component';
 import { NotifyComponent } from './notify/notify.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NotifyComponent } from './notify/notify.component';
     AngularFireAuthModule, // Firebase authentication
     AngularFirestoreModule, // Firestore
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
    
   
 

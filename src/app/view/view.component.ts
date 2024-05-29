@@ -5,7 +5,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { Router } from '@angular/router';
-import { StudentDataShareService } from '../student-data-share.service';
 
 @Component({
   selector: 'app-view',
@@ -19,8 +18,7 @@ export class ViewComponent {
     private firestore: AngularFirestore,
     private afAuth: AngularFireAuth,
     private functions: AngularFireFunctions,
-    private router :Router,
-    private studentService:StudentDataShareService
+    private router :Router
   ) {}
   students: Student[] = [];
   errorMessage: string = '';

@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Student } from '../students';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { StudentDataShareService } from '../student-data-share.service';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -33,12 +32,12 @@ isEdit: boolean = false;
   errorMessage: string = '';
   photo: File | null = null;
   leaseAgreement: File | null = null;
+ 
   constructor(
     private firestore: AngularFirestore,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private storage :AngularFireStorage,
-    private studentService: StudentDataShareService
+    private storage :AngularFireStorage
   ) 
    
   {}

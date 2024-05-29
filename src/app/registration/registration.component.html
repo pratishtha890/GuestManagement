@@ -17,7 +17,9 @@
     </div>
     <div class="mb-3">
       <label for="phoneNumber" class="form-label">Phone Number</label>
-      <input type="tel" id="phoneNumber" [(ngModel)]="student.phoneNumber" name="phoneNumber" pattern="^\+?\d{10,15}$" class="form-control" required>
+      <input type="tel" id="phoneNumber" [(ngModel)]="student.phoneNumber" name="phoneNumber" 
+             pattern="^\+?\d{10,15}$" class="form-control" required 
+             placeholder="Enter your phone number">
       <div class="invalid-feedback">
         Please provide a valid phone number.
       </div>
