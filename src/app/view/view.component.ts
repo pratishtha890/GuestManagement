@@ -29,6 +29,7 @@ export class ViewComponent {
     try {
       const user = await this.afAuth.currentUser;
       if (user) {
+        this.students = [];
         this.firestore.collection<Student>('students', ref => ref.where('adminId', '==', user.uid))
           .valueChanges().subscribe(data => {
             this.students = data;
@@ -43,7 +44,7 @@ export class ViewComponent {
       this.errorMessage = 'Error fetching students. Please try again.';
       console.error('Error fetching students:', error);
     }
-    this.fetchStudents();
+   // this.fetchStudents();
   }
   viewPhoto(photoUrl: string) {
     this.selectedPhotoUrl = photoUrl;
@@ -53,11 +54,6 @@ export class ViewComponent {
   closeModal() {
     this.showModal = false;
     this.selectedPhotoUrl = null;
-  }
-  editStudent(student: Student) {
-    this.router.navigate(['/register']);
-  
-
   }
   deleteStudent(studentId: string) {
     if (confirm('Are you sure you want to delete this student?')) {
@@ -80,20 +76,7 @@ export class ViewComponent {
         }
       );
     }
-/*  sendSmsReminder(student: Student) {
-    this.emailReminderService.sendReminder(student.email,student.name,student.rent)
-    .subscribe(
-      response => console.log('Email sent successfully', response),
-      
-      error => console.error('Error sending email', error)
-    );*/
- //   const sendEmailReminder = this.functions.httpsCallable('sendEmailReminder');
- //   sendEmailReminder({ email: student.email, name: student.name, rent: student.rent }).subscribe(response => {
- //     console.log('SMS reminder sent', response);
-  //    alert('SMS reminder sent successfully!');
-    //}, error => {
-      //console.error('Error sending SMS reminder', error);
-    //  alert('Error sending email reminder. Please try again.');
-    //});
-//}
+    editStudent(student: Student) {
+      this.router.navigate(['/register'], { queryParams: { id: student.id } });
+    }
 }

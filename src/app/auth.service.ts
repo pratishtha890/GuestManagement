@@ -24,4 +24,7 @@ async logout()
 signInWithGoogle() {
   return this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 }
+getUser() {
+  return this.auth.user;
+}
 }

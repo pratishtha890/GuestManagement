@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h2>Registered Students</h2>
+    <h2>My Guests</h2>
   
     <div *ngIf="errorMessage" class="alert alert-danger mt-3">
       {{ errorMessage }}
@@ -12,11 +12,11 @@
     <table *ngIf="students.length > 0" class="table table-striped mt-3">
       <thead>
         <tr>
+          <th>Photo</th>
           <th>Name</th>
           <th>Email</th>
           <th>Rent</th>
           <th>Address</th>
-          <th>Photo</th>
           <th>Lease Agreement</th>
       
           <th>Action</th>

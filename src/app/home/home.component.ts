@@ -16,7 +16,7 @@ showmodal:boolean=false;
 
   logout() {
     this.afAuth.signOut().then(() => {
-      this.router.navigate(['/login']);  // Redirect to login page after logout
+      this.router.navigate(['']);  // Redirect to login page after logout
       this.showmodal=false;
     }).catch(error => {
       console.error('Logout error', error);
