@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +15,8 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
   @ViewChild('registerForm') registerForm!: NgForm;
+  @ViewChild('photoInput') photoInput!: ElementRef;
+  @ViewChild('leaseAgreementInput') leaseAgreementInput!: ElementRef;
   isEdit: boolean = false;
   minDate: string = '';
   student: Student = {
@@ -26,7 +28,8 @@ export class RegistrationComponent implements OnInit {
     photo: '',
     phoneNumber: '',
     leaseAgreement: '',
-    startDate: new Date()
+    startDate: new Date(),
+    adminId: '' // Initialize adminId
   };
   successMessage: string = '';
   errorMessage: string = '';
@@ -113,6 +116,8 @@ export class RegistrationComponent implements OnInit {
           this.student.leaseAgreement = this.existingLeaseAgreementUrl;
         }
 
+        this.student.adminId = user.uid; // Set adminId to the current user's UID
+
         if (this.isEdit) {
           await this.firestore.collection('students').doc(this.student.id).update(this.student);
           alert('Student updated successfully');
@@ -134,6 +139,19 @@ export class RegistrationComponent implements OnInit {
     } catch (error) {
       console.error('Error registering student:', error);
       this.errorMessage = 'Error registering student. Please try again.';
+    } finally {
+      this.photo = null; // Remove chosen photo
+      this.leaseAgreement = null; // Remove chosen lease agreement doc
+      this.resetFileInputs(); // Reset file input elements
+    }
+  }
+
+  resetFileInputs() {
+    if (this.photoInput) {
+      this.photoInput.nativeElement.value = '';
+    }
+    if (this.leaseAgreementInput) {
+      this.leaseAgreementInput.nativeElement.value = '';
     }
   }
 
@@ -147,7 +165,8 @@ export class RegistrationComponent implements OnInit {
       photo: '',
       phoneNumber: '',
       leaseAgreement: '',
-      startDate: new Date()
+      startDate: new Date(),
+      adminId: '' // Reset adminId
     };
     this.photo = null;
     this.leaseAgreement = null;
@@ -159,5 +178,7 @@ export class RegistrationComponent implements OnInit {
     if (this.registerForm) {
       this.registerForm.resetForm();
     }
+
+    this.resetFileInputs(); // Ensure file inputs are reset
   }
 }

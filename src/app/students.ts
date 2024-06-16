@@ -3,7 +3,7 @@ export interface Student {
     name: string;
     email: string;
     rent: number;
-    adminId?: string;
+    adminId: string;
     address : string;
     photo: string;
     leaseAgreement: string ;
